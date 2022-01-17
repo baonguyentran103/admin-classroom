@@ -56,7 +56,6 @@ export const AccountProfile = (profile, ...props) => {
             color="textSecondary"
             variant="body2"
           >
-            {tmp.DepartmentName}
           </Typography>
         </Box>
       </CardContent>

@@ -23,35 +23,35 @@ const items = [
     title: 'Calendar'
   },
   {
-    href: '/customers',
+    href: '/admins',
     icon: (<ContactsIcon fontSize="small" />),
     title: 'Address book'
   },
-  // {
-  //   href: '/products',
-  //   icon: (<ShoppingBagIcon fontSize="small" />),
-  //   title: 'Products'
-  // },
-  // {
-  //   href: '/account',
-  //   icon: (<UserIcon fontSize="small" />),
-  //   title: 'Account'
-  // },
-  // {
-  //   href: '/settings',
-  //   icon: (<CogIcon fontSize="small" />),
-  //   title: 'Settings'
-  // },
-  // {
-  //   href: '/login',
-  //   icon: (<LockIcon fontSize="small" />),
-  //   title: 'Login'
-  // },
-  // {
-  //   href: '/register',
-  //   icon: (<UserAddIcon fontSize="small" />),
-  //   title: 'Register'
-  // },
+  {
+    href: '/products',
+    icon: (<ShoppingBagIcon fontSize="small" />),
+    title: 'Products'
+  },
+  {
+    href: '/account',
+    icon: (<UserIcon fontSize="small" />),
+    title: 'Account'
+  },
+  {
+    href: '/settings',
+    icon: (<CogIcon fontSize="small" />),
+    title: 'Settings'
+  },
+  {
+    href: '/login',
+    icon: (<LockIcon fontSize="small" />),
+    title: 'Login'
+  },
+  {
+    href: '/register',
+    icon: (<UserAddIcon fontSize="small" />),
+    title: 'Register'
+  },
   // {
   //   href: '/404',
   //   icon: (<XCircleIcon fontSize="small" />),

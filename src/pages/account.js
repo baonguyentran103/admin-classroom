@@ -8,7 +8,7 @@ const Account = () => (
   <>
     <Head>
       <title>
-        Account | Material Kit
+        Admins | Material Kit
       </title>
     </Head>
     <Box

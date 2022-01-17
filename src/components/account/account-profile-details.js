@@ -25,7 +25,7 @@ const states = [
   }
 ];
 
-export const AccountProfileDetails = ({profile, departs, props}) => {
+export const AccountProfileDetails = ({profile, props}) => {
   const [values, setValues] = useState(profile);
   const handleChange = (event) => {
     setValues({
@@ -148,7 +148,7 @@ export const AccountProfileDetails = ({profile, departs, props}) => {
               md={8}
               xs={12}
             >
-              <TextField
+              {/* <TextField
                 fullWidth
                 label="Select Department"
                 name="DepartmentID"
@@ -170,7 +170,7 @@ export const AccountProfileDetails = ({profile, departs, props}) => {
                     {dep.DepartmentName}
                   </option>
                 ))}
-              </TextField>
+              </TextField> */}
             </Grid>
           </Grid>
         </CardContent>

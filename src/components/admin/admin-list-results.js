@@ -18,7 +18,7 @@ import {
 } from '@mui/material';
 import { getInitials } from '../../utils/get-initials';
 
-export const CustomerListResults = ({ customers, departs}) => {
+export const AdminListResults = ({ admins}) => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
@@ -26,7 +26,7 @@ export const CustomerListResults = ({ customers, departs}) => {
   const [recordForEdit, setRecordForEdit] = useState(null);
   useEffect(()=>{
 
-  }, [customers]);
+  }, [admins]);
   const handleLimitChange = (event) => {
     setLimit(event.target.value);
   };
@@ -48,27 +48,39 @@ export const CustomerListResults = ({ customers, departs}) => {
             <TableHead>
               <TableRow>
               <TableCell>
+                  ID
+                </TableCell>
+              <TableCell>
                   Avatar
                 </TableCell>
                 <TableCell>
-                Employee Name
-                </TableCell>
-                <TableCell>
-                  Department
+                Fullname
                 </TableCell>
                 <TableCell>
                   Email
                 </TableCell>
-                <TableCell>
-                  Tel
-                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {customers.slice(page*limit, limit*(page + 1)).map((customer) => (
+              {admins.slice(page*limit, limit*(page + 1)).map((admin) => (
                 <TableRow
                   hover
                 >
+                <TableCell>
+                  <Box
+                      sx={{
+                        alignItems: 'center',
+                        display: 'flex'
+                      }}
+                    >
+                       <Typography
+                        color="textPrimary"
+                        variant="body1"
+                      >
+                        {admin.AdminID}
+                      </Typography>
+                    </Box>
+                  </TableCell>
                   <TableCell>
                   <Box
                       sx={{
@@ -77,11 +89,11 @@ export const CustomerListResults = ({ customers, departs}) => {
                       }}
                     >
                       <Avatar
-                        src={customer.Avatar}
+                        src={admin.Avatar}
                         sx={{ mr: 2 }}
-                        onClick={() => { openInPopup(customer) }}
+                        onClick={() => { openInPopup(admin) }}
                       >
-                        {getInitials(customer.Fullname)}
+                        {getInitials(admin.Fullname)}
                       </Avatar>
                     </Box>
                   </TableCell>
@@ -96,18 +108,12 @@ export const CustomerListResults = ({ customers, departs}) => {
                         color="textPrimary"
                         variant="body1"
                       >
-                        {customer.FullName} ({customer.EmployeeCode})
+                        {admin.Fullname}
                       </Typography>
                     </Box>
                   </TableCell>
                   <TableCell>
-                    {customer.DepartmentName}
-                  </TableCell>
-                  <TableCell>
-                    {customer.Email}
-                  </TableCell>
-                  <TableCell>
-                    {customer.Tel}
+                    {admin.Email}
                   </TableCell>
                 </TableRow>
               ))}
@@ -117,7 +123,7 @@ export const CustomerListResults = ({ customers, departs}) => {
       </PerfectScrollbar>
       <TablePagination
         component="div"
-        count={customers.length}
+        count={admins.length}
         onPageChange={handlePageChange}
         onRowsPerPageChange={handleLimitChange}
         page={page}
@@ -132,12 +138,8 @@ export const CustomerListResults = ({ customers, departs}) => {
             >
                 <AccountForm
                     profile={recordForEdit}
-                    departs ={departs}/>
+                    />
             </Popup>
     </>
   );
-};
-
-CustomerListResults.propTypes = {
-  customers: PropTypes.array.isRequired
 };

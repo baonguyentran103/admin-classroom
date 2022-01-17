@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Box, Button, Container, TextField, Typography } from '@mui/material';
-import { login } from '../services/api/auth';
 const Login = () => {
   const router = useRouter();
   const formik = useFormik({
@@ -27,7 +26,7 @@ const Login = () => {
         username: values.userID,
         password: values.password,
       };
-      const response  = await login(postData);
+      const response  = await null;
       if (response) {
         console.log(response);
         router.push('/');

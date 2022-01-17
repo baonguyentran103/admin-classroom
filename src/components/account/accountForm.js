@@ -3,7 +3,7 @@ import { Box, Container, Grid, Typography } from '@mui/material';
 import { AccountProfile } from './account-profile';
 import { AccountProfileDetails } from './account-profile-details';
 
-const AccountForm = ({profile, departs}) => (
+const AccountForm = ({profile}) => (
   <>
     <Container maxWidth="lg">
       <Typography
@@ -30,7 +30,7 @@ const AccountForm = ({profile, departs}) => (
           md={6}
           xs={12}
         >
-          <AccountProfileDetails profile = {profile} departs ={departs}/>
+          <AccountProfileDetails profile = {profile}/>
         </Grid>
       </Grid>
     </Container>

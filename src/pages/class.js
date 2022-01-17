@@ -6,14 +6,17 @@ import { DashboardLayout } from '../components/dashboard-layout';
 import {useEffect, useState} from 'react'
 import withAuth from '../services/withAuth';
 import axios from 'axios'
-import env from '../config/env.config'
-import { getListCustomer } from '../services/api/customers';
+import {getUrlGetAllAdmin} from '../services/app.service'
 const Customers = () => { 
   const [customers, setCustomers] = useState([]);
   const fetchData = async () => {
-    const listCustomer = await getListCustomer();
-    console.log('res', listCustomer.data);
-    setCustomers(listCustomer.data);
+    const url = getUrlGetAllAdmin();
+    let listAdmin;
+    await axios.get(url).then((reponse) =>{
+      listAdmin = reponse.data;
+    })
+    console.log('res', listAdmin);
+    setCustomers(listAdmin);
   }
   useEffect(() =>{
       if(customers.length ==0){
@@ -26,7 +29,7 @@ const Customers = () => {
   <>
     <Head>
       <title>
-        Customers | Cloud9
+        Admins | Cloud9
       </title>
     </Head>
     <Box
@@ -42,5 +45,9 @@ const Customers = () => {
     </Box>
   </>
 )};
-
-export default withAuth(Customers);
+Customers.getLayout = (page) => (
+  <DashboardLayout>
+    {page}
+  </DashboardLayout>
+);
+export default Customers;

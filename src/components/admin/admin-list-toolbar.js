@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { format } from 'date-fns';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
+import { Menu } from '@mui/material';
 import Select from '@mui/material/Select';
 import {
   Box,
@@ -15,26 +16,27 @@ import {
 } from '@mui/material';
 import axios from 'axios';
 import { Search as SearchIcon } from '../../icons/search';
-import { CustomerListResults } from './customer-list-results';
+import {getUrlGetAllAdmin} from '../../services/app.service'
+import {AdminListResults} from './admin-list-results';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import IconButton from '@mui/material/IconButton';
 
-import { getListDepartment } from '../../services/api/departments';
 
-
-export const CustomerListToolbar = ({customers}) => {
-  const [rows, setRows] = useState(customers);
+export const AdminListToolbar = ({admins}) => {
+  const [rows, setRows] = useState(admins);
   const [searchedVal, setSearchedVal] = useState("");
   const [depart, setDepart] = useState("All");
   const [departs, setDeparts] = useState([]);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [searchFil, setSearchFil] = useState(0);
 
   const fetchData = async () => {
-    const listDepartment = await getListDepartment();
-    setDeparts(listDepartment.data);
-    console.log(listDepartment.data)
+    
   };
 
   useEffect(()=>{  
-    setRows(customers);
-  }, [customers]);
+    setRows(admins);
+  }, [admins]);
   useEffect(()=>{
     fetchData();
   }, []);
@@ -44,29 +46,29 @@ export const CustomerListToolbar = ({customers}) => {
     setSearchedVal(event.target.value);
     let tmp = event.target.value;
     if(tmp!==''){
-      const filteredRows = customers.filter((row) => {
-        return row.FullName.toLowerCase().includes(tmp.toLowerCase());
+      
+      const filteredRows = admins.filter((row) => {
+        if(searchFil ===0){
+          return row.Fullname.toLowerCase().includes(tmp.toLowerCase());
+        }
+        else return row.Email.toLowerCase().includes(tmp.toLowerCase());
       });
       setRows(filteredRows);
     }
     else{
-      setRows(customers);
+      setRows(admins);
     }
   };
-  const handleSelect = (event) => {
-    setDepart(event.target.value);
-    let tmp = event.target.value;
-    if(tmp!=='All'){
-      const filteredRows = customers.filter((row) => {
-        return row.DepartmentID === tmp;
-      });
-      setRows(filteredRows);
-    }
-    else{
-      setRows(customers);
-    }
-  };
-  
+  const handleClose = () => { setAnchorEl(null); }
+  const searchName = ()=>{
+    setSearchFil(0);
+    handleClose();
+  }
+  const searchMail = ()=>{
+    setSearchFil(1);
+    handleClose();
+  }
+  const handleClickFilter = (event) => setAnchorEl(event.currentTarget);
   return(
     <Box>
       <Box>
@@ -83,15 +85,13 @@ export const CustomerListToolbar = ({customers}) => {
             sx={{ m: 1 }}
             variant="h4"
           >
-            Customers
+            Admins
           </Typography>
         </Box>
         <Box sx={{ mt: 3 }}>
           <Card>
-            <CardContent sx={{display: 'flex',
-            justifyContent: 'space-between',
-            flexWrap: 'wrap'}}>
-              <Box sx={{ maxWidth: 500 }}>
+            <CardContent sx={{display: 'flex', flexWrap: 'wrap'}}>
+              <Box sx={{ }}>
                 <TextField
                   fullWidth
                   InputProps={{
@@ -106,28 +106,35 @@ export const CustomerListToolbar = ({customers}) => {
                       </InputAdornment>
                     )
                   }}
-                  placeholder="Search customer"
+                  placeholder="Search admin"
                   variant="outlined"
                   onChange= {handleSearch}
                 />
                 
               </Box>
-              <Box sx={{ maxWidth: 500, mt:-3}}>
-                <InputLabel id="demo-simple-select-helper-label">Department</InputLabel>
+              <Box sx={{ mt:0}}>
+                <IconButton onClick={handleClickFilter}><FilterAltIcon fontSize= 'large'/></IconButton>
+                <Menu
+                    // id="simple-menu"
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}
+                    transformOrigin={{ horizontal: 'right', vertical: 'top' }} // left of add button
+                    sx ={{ml:15, mt: -3}}
+                >
+                    <MenuItem selected= {searchFil === 0} onClick={searchName}>Fullname</MenuItem>
+                    <MenuItem selected= {searchFil === 1} onClick={searchMail}>Email</MenuItem>
+                </Menu>
+                {/* <InputLabel id="demo-simple-select-helper-label">Department</InputLabel>
                 <Select
                   sx={{width:250}}
                   labelId="demo-simple-select-helper-label"
                   id="demo-simple-select-helper"
-                  value={depart}
                   label="Department"
-                  onChange={handleSelect}
-                >
-                  <MenuItem value='All'>All</MenuItem>
-                  {departs.map((depa) => (
-                  <MenuItem value={depa.DepartmentID}>{depa.DepartmentName}</MenuItem>
-                  ))}
+                > 
                   
-                </Select> 
+                </Select> */}
                   
                 
               </Box>
@@ -136,7 +143,7 @@ export const CustomerListToolbar = ({customers}) => {
         </Box>
       </Box>
       <Box sx={{mt:3}}>
-        <CustomerListResults customers={rows} departs = {departs}/>
+        <AdminListResults admins={rows}/>
       </Box>
       
     </Box>
