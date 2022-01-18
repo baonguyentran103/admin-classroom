@@ -10,7 +10,12 @@ const urlSignUp = CurrentUrlAPI + '/signup';
 function getUrlGetAllAdmin() {
     return CurrentUrlAPI + '/admin?typeSearch=multiple';
 };
-
+function getUrlGetAllClasses() {
+    return CurrentUrlAPI + '/classes?typeSearch=multiple';
+};
+function getUrlGetAllUser() {
+    return CurrentUrlAPI + '/users?typeSearch=multiple';
+};
 function getUrlGetJoinedClasses(userID) {
     return CurrentUrlAPI + '/users/' + userID + '/class-user?role=student'
 };
@@ -131,6 +136,7 @@ export {
     urlSignIn,
     urlSignUp,
     getUrlGetAllAdmin,
+    getUrlGetAllClasses,
     getUrlGetJoinedClasses,
     getUrlGetCreatedClasses,
     getUrlAddStudentToClass,
@@ -152,7 +158,7 @@ export {
 
     getUrlAddOrGetNoti,
     getUrlEditNoti,
-
+    getUrlGetAllUser,
     getUrlUpdateUser,
     getUrlGetUserByEmail,
 

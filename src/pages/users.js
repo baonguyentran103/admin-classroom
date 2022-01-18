@@ -1,24 +1,24 @@
 import Head from 'next/head';
 import { Box, Container } from '@mui/material';
-import { AdminListToolbar } from '../components/admin/admin-list-toolbar';
+import { UserListToolbar } from '../components/user/user-list-toolbar';
 import { DashboardLayout } from '../components/dashboard-layout';
 import {useEffect, useState} from 'react'
 import withAuth from '../services/withAuth';
 import axios from 'axios'
-import {getUrlGetAllAdmin} from '../services/app.service'
-const Admins = () => { 
-  const [admins, setAdmins] = useState([]);
+import {getUrlGetAllUser} from '../services/app.service'
+const Users = () => { 
+  const [users, setUsers] = useState([]);
   const fetchData = async () => {
-    const url = getUrlGetAllAdmin();
-    let listAdmin;
+    const url = getUrlGetAllUser();
+    let listUser;
     await axios.get(url).then((reponse) =>{
-      listAdmin = reponse.data;
+      listUser = reponse.data;
     })
-    console.log('res', listAdmin);
-    setAdmins(listAdmin);
+    console.log('res', listUser);
+    setUsers(listUser);
   }
   useEffect(() =>{
-      if(admins.length ==0){
+      if(users.length ==0){
         fetchData();
       }
     
@@ -28,7 +28,7 @@ const Admins = () => {
   <>
     <Head>
       <title>
-        Admins | Cloud9
+        User
       </title>
     </Head>
     <Box
@@ -39,14 +39,14 @@ const Admins = () => {
       }}
     >
       <Container maxWidth={false}>
-        <AdminListToolbar admins = {admins}/>
+        <UserListToolbar users = {users}/>
       </Container>
     </Box>
   </>
 )};
-Admins.getLayout = (page) => (
+Users.getLayout = (page) => (
   <DashboardLayout>
     {page}
   </DashboardLayout>
 );
-export default Admins;
+export default Users;

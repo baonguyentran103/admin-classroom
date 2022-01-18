@@ -1,25 +1,24 @@
 import Head from 'next/head';
 import { Box, Container } from '@mui/material';
-import { CustomerListResults } from '../components/customer/customer-list-results';
-import { CustomerListToolbar } from '../components/customer/customer-list-toolbar';
+import { ClassListToolbar } from '../components/class/class-list-toolbar';
 import { DashboardLayout } from '../components/dashboard-layout';
 import {useEffect, useState} from 'react'
 import withAuth from '../services/withAuth';
 import axios from 'axios'
-import {getUrlGetAllAdmin} from '../services/app.service'
-const Customers = () => { 
-  const [customers, setCustomers] = useState([]);
+import {getUrlGetAllClasses} from '../services/app.service'
+const Classs = () => { 
+  const [classs, setClasss] = useState([]);
   const fetchData = async () => {
-    const url = getUrlGetAllAdmin();
-    let listAdmin;
+    const url = getUrlGetAllClasses();
+    let listClass;
     await axios.get(url).then((reponse) =>{
-      listAdmin = reponse.data;
+      listClass = reponse.data;
     })
-    console.log('res', listAdmin);
-    setCustomers(listAdmin);
+    console.log('res', listClass);
+    setClasss(listClass);
   }
   useEffect(() =>{
-      if(customers.length ==0){
+      if(classs.length ==0){
         fetchData();
       }
     
@@ -29,7 +28,7 @@ const Customers = () => {
   <>
     <Head>
       <title>
-        Admins | Cloud9
+        Classs | Cloud9
       </title>
     </Head>
     <Box
@@ -40,14 +39,14 @@ const Customers = () => {
       }}
     >
       <Container maxWidth={false}>
-        <CustomerListToolbar customers = {customers}/>
+        <ClassListToolbar classs = {classs}/>
       </Container>
     </Box>
   </>
 )};
-Customers.getLayout = (page) => (
+Classs.getLayout = (page) => (
   <DashboardLayout>
     {page}
   </DashboardLayout>
 );
-export default Customers;
+export default Classs;
