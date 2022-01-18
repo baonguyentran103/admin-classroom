@@ -18,49 +18,54 @@ const user = {
   timezone: 'GTM-7'
 };
 
-export const AccountProfile = (profile, ...props) => {
-  var tmp = profile.profile;
-
-  return(
-    <Card {...props}>
-      <CardContent>
-        <Box
+export const AccountProfile = (props) => (
+  <Card {...props}>
+    <CardContent>
+      <Box
+        sx={{
+          alignItems: 'center',
+          display: 'flex',
+          flexDirection: 'column'
+        }}
+      >
+        <Avatar
+          src={user.avatar}
           sx={{
-            alignItems: 'center',
-            display: 'flex',
-            flexDirection: 'column'
+            height: 64,
+            mb: 2,
+            width: 64
           }}
+        />
+        <Typography
+          color="textPrimary"
+          gutterBottom
+          variant="h5"
         >
-          <Avatar
-            src={tmp.Avatar}
-            sx={{
-              height: 64,
-              mb: 2,
-              width: 64
-            }}
-          />
-          <Typography
-            color="textPrimary"
-            gutterBottom
-            variant="h5"
-          >
-            {tmp.FullName}
-          </Typography>
-          <Typography
-            color="textSecondary"
-            variant="body2"
-          >
-            {tmp.Email}
-          </Typography>
-          <Typography
-            color="textSecondary"
-            variant="body2"
-          >
-          </Typography>
-        </Box>
-      </CardContent>
-      <Divider />
-    </Card>
-  );
-  
-};
+          {user.name}
+        </Typography>
+        <Typography
+          color="textSecondary"
+          variant="body2"
+        >
+          {`${user.city} ${user.country}`}
+        </Typography>
+        <Typography
+          color="textSecondary"
+          variant="body2"
+        >
+          {user.timezone}
+        </Typography>
+      </Box>
+    </CardContent>
+    <Divider />
+    <CardActions>
+      <Button
+        color="primary"
+        fullWidth
+        variant="text"
+      >
+        Upload picture
+      </Button>
+    </CardActions>
+  </Card>
+);

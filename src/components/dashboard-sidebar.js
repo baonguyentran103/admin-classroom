@@ -16,6 +16,7 @@ import { Logo } from './logo';
 import { NavItem } from './nav-item';
 import ContactsIcon from '@mui/icons-material/Contacts';
 import DateRangeIcon from '@mui/icons-material/DateRange';
+import GroupsIcon from '@mui/icons-material/Groups';
 const items = [
   {
     href: '/',
@@ -28,14 +29,19 @@ const items = [
     title: 'Address book'
   },
   {
-    href: '/products',
-    icon: (<ShoppingBagIcon fontSize="small" />),
-    title: 'Products'
-  },
-  {
     href: '/account',
     icon: (<UserIcon fontSize="small" />),
     title: 'Account'
+  },
+  {
+    href: '/class',
+    icon: (<GroupsIcon fontSize="small" />),
+    title: 'Class'
+  },
+  {
+    href: '/users',
+    icon: (<UserIcon fontSize="small" />),
+    title: 'User'
   },
   {
     href: '/settings',
@@ -51,7 +57,7 @@ const items = [
     href: '/register',
     icon: (<UserAddIcon fontSize="small" />),
     title: 'Register'
-  },
+  }
   // {
   //   href: '/404',
   //   icon: (<XCircleIcon fontSize="small" />),
@@ -126,7 +132,7 @@ export const DashboardSidebar = (props) => {
                 >
                   Cloud9 Solutions
                 </Typography>
-                
+
               </div>
               <SelectorIcon
                 sx={{

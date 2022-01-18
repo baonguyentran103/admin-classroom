@@ -42,11 +42,17 @@ const Register = () => {
         .string()
         .max(255)
         .required(
-          'Password is required')
-      
+          'Password is required'),
+      userid: Yup
+        .number()
+        .required(
+          'Userid is required')
+
     }),
     onSubmit: () => {
-      router.push('/');
+      const { email, fullname, password, userid } = formik.values
+      console.log("submit", userid, email, fullname, password);
+      // router.push('/');
     }
   });
 
@@ -54,7 +60,7 @@ const Register = () => {
     <>
       <Head>
         <title>
-          Register 
+          Register
         </title>
       </Head>
       <Box
@@ -95,6 +101,18 @@ const Register = () => {
               </Typography>
             </Box>
             <TextField
+              error={Boolean(formik.touched.userid && formik.errors.userid)}
+              fullWidth
+              helperText={formik.touched.userid && formik.errors.userid}
+              label="UserID"
+              margin="normal"
+              name="userid"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.userid}
+              variant="outlined"
+            />
+            <TextField
               error={Boolean(formik.touched.fullname && formik.errors.fullname)}
               fullWidth
               helperText={formik.touched.fullname && formik.errors.fullname}
@@ -132,11 +150,11 @@ const Register = () => {
               value={formik.values.password}
               variant="outlined"
             />
-            
+
             <Box sx={{ py: 2 }}>
               <Button
                 color="primary"
-                disabled={formik.isSubmitting}
+                // disabled={formik.isSubmitting}
                 fullWidth
                 size="large"
                 type="submit"

@@ -25,8 +25,16 @@ const states = [
   }
 ];
 
-export const AccountProfileDetails = ({profile, props}) => {
-  const [values, setValues] = useState(profile);
+export const AccountProfileDetails = (props) => {
+  const [values, setValues] = useState({
+    firstName: 'Katarina',
+    lastName: 'Smith',
+    email: 'demo@devias.io',
+    phone: '',
+    state: 'Alabama',
+    country: 'USA'
+  });
+
   const handleChange = (event) => {
     setValues({
       ...values,
@@ -42,7 +50,7 @@ export const AccountProfileDetails = ({profile, props}) => {
     >
       <Card>
         <CardHeader
-          subheader="The information can not be edited"
+          subheader="The information can be edited"
           title="Profile"
         />
         <Divider />
@@ -53,124 +61,105 @@ export const AccountProfileDetails = ({profile, props}) => {
           >
             <Grid
               item
-              md={8}
+              md={6}
               xs={12}
             >
               <TextField
                 fullWidth
-                label="Fullname"
-                name="FullName"
+                helperText="Please specify the first name"
+                label="First name"
+                name="firstName"
                 onChange={handleChange}
                 required
-                value={values.FullName}
+                value={values.firstName}
                 variant="outlined"
-                InputProps={{
-                  readOnly: true,
-                }}
               />
             </Grid>
             <Grid
               item
-              md={4}
+              md={6}
               xs={12}
             >
               <TextField
                 fullWidth
-                label="Employee Code"
-                name="EmployeeCode"
+                label="Last name"
+                name="lastName"
                 onChange={handleChange}
                 required
-                value={values.EmployeeCode}
+                value={values.lastName}
                 variant="outlined"
-                InputProps={{
-                  readOnly: true,
-                }}
               />
             </Grid>
-            
             <Grid
               item
-              md={7}
+              md={6}
               xs={12}
             >
               <TextField
                 fullWidth
                 label="Email Address"
-                name="Email"
+                name="email"
                 onChange={handleChange}
                 required
-                value={values.Email}
+                value={values.email}
                 variant="outlined"
-                InputProps={{
-                  readOnly: true,
-                }}
               />
             </Grid>
             <Grid
               item
-              md={5}
+              md={6}
               xs={12}
             >
               <TextField
                 fullWidth
                 label="Phone Number"
-                name="Tel"
+                name="phone"
                 onChange={handleChange}
-                required
                 type="number"
-                value={values.Tel}
+                value={values.phone}
                 variant="outlined"
-                InputProps={{
-                  readOnly: true,
-                }}
               />
             </Grid>
             <Grid
               item
-              md={4}
+              md={6}
               xs={12}
             >
               <TextField
                 fullWidth
-                label="Entry Date"
-                name="EntryDate"
+                label="Country"
+                name="country"
                 onChange={handleChange}
                 required
-                value={values.EntryDate}
+                value={values.country}
                 variant="outlined"
-                InputProps={{
-                  readOnly: true,
-                }}
               />
             </Grid>
             <Grid
               item
-              md={8}
+              md={6}
               xs={12}
             >
-              {/* <TextField
+              <TextField
                 fullWidth
-                label="Select Department"
-                name="DepartmentID"
+                label="Select State"
+                name="state"
                 onChange={handleChange}
                 required
                 select
                 SelectProps={{ native: true }}
-                value={values.DepartmentID}
+                value={values.state}
                 variant="outlined"
-                InputProps={{
-                  readOnly: true,
-                }}
               >
-                {departs.map((dep) => (
+                {states.map((option) => (
                   <option
-                    key={dep.DepartmentID}
-                    value={dep.DepartmentID}
+                    key={option.value}
+                    value={option.value}
                   >
-                    {dep.DepartmentName}
+                    {option.label}
                   </option>
                 ))}
-              </TextField> */}
+              </TextField>
             </Grid>
           </Grid>
         </CardContent>
