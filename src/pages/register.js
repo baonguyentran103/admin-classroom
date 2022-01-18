@@ -13,7 +13,9 @@ import {
   TextField,
   Typography
 } from '@mui/material';
+import { CurrentUrlAPI } from '../services/app.service'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import axios from 'axios';
 
 const Register = () => {
   const router = useRouter();
@@ -44,14 +46,32 @@ const Register = () => {
         .required(
           'Password is required'),
       userid: Yup
-        .number()
+        .string()
+        .max(255)
         .required(
           'Userid is required')
 
     }),
-    onSubmit: () => {
-      const { email, fullname, password, userid } = formik.values
+    onSubmit: async () => {
+      const { email, fullname, password, userid } = formik.values;
+
+      const postData = {
+        id: userid,
+        password: password,
+        fullName: fullname,
+        email: email,
+      }
+
+      const url = CurrentUrlAPI + '/admin';
+      await axios.post(url, postData).then((response) => {
+        console.log(response);
+      }).catch((error) => {
+        console.log(error);
+      })
+
       console.log("submit", userid, email, fullname, password);
+      console.log("submit", postData, url);
+
       // router.push('/');
     }
   });
