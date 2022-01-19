@@ -23,11 +23,11 @@ const items = [
     icon: (<UserIcon fontSize="small" />),
     title: 'Admins'
   },
-  {
-    href: '/account',
-    icon: (<UserIcon fontSize="small" />),
-    title: 'Account'
-  },
+  // {
+  //   href: '/account',
+  //   icon: (<UserIcon fontSize="small" />),
+  //   title: 'Account'
+  // },
   {
     href: '/class',
     icon: (<GroupsIcon fontSize="small" />),
@@ -37,16 +37,6 @@ const items = [
     href: '/users',
     icon: (<UserIcon fontSize="small" />),
     title: 'User'
-  },
-  {
-    href: '/settings',
-    icon: (<CogIcon fontSize="small" />),
-    title: 'Settings'
-  },
-  {
-    href: '/login',
-    icon: (<LockIcon fontSize="small" />),
-    title: 'Login'
   },
   {
     href: '/register',
@@ -125,7 +115,7 @@ export const DashboardSidebar = (props) => {
                   color="inherit"
                   variant="subtitle1"
                 >
-                  Cloud9 Solutions
+                  Nguyen Dat Admin
                 </Typography>
 
               </div>
