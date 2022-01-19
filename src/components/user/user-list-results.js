@@ -104,6 +104,9 @@ export const UserListResults = ({ users }) => {
                   <TableCell>
                     Baned
                   </TableCell>
+                  <TableCell>
+                    Created At
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -165,6 +168,7 @@ export const UserListResults = ({ users }) => {
                     <TableCell>
                       {user.Email}
                     </TableCell>
+
                     <TableCell>
                       {listBanned[page * limit + index] ?
                         <IconButton aria-label="delete" sx={{ color: "red" }} onClick={() => handleClickBanner(page * limit + index, user)}>
@@ -174,6 +178,9 @@ export const UserListResults = ({ users }) => {
                         <IconButton aria-label="delete" sx={{ color: "grey" }} onClick={() => handleClickBanner(page * limit + index, user)}>
                           <CheckBoxOutlineBlankIcon />
                         </IconButton>}
+                    </TableCell>
+                    <TableCell>
+                      {user.CreatedAt}
                     </TableCell>
                   </TableRow>
                 ))}
