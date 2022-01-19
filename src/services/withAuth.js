@@ -8,6 +8,7 @@ const withAuth =  (WrappedComponent) => {
     if (typeof window !== "undefined") {
       const Router = useRouter();
       // If there is no access token we redirect to "/" page.
+      const accessToken = localStorage.getItem('adminToken');
       if (!accessToken) {
         Router.replace("/login");
         return null;

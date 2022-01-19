@@ -44,9 +44,5 @@ const Classs = () => {
     </Box>
   </>
 )};
-Classs.getLayout = (page) => (
-  <DashboardLayout>
-    {page}
-  </DashboardLayout>
-);
-export default Classs;
+
+export default withAuth(Classs);

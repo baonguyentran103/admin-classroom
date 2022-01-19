@@ -6,6 +6,9 @@ import SearchIcon from '@mui/icons-material/Search';
 import { Bell as BellIcon } from '../icons/bell';
 import { UserCircle as UserCircleIcon } from '../icons/user-circle';
 import { Users as UsersIcon } from '../icons/users';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { Menu, MenuItem } from '@material-ui/core';
 
 const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
@@ -14,7 +17,23 @@ const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
 
 export const DashboardNavbar = (props) => {
   const { onSidebarOpen, ...other } = props;
+  const Router = useRouter();
+  const [anchorElAvatar, setAnchorElAvatar] = useState(null);
+  const handleClickAvatar = (event) => setAnchorElAvatar(event.currentTarget);
+  const handleCloseAvatar = () => { setAnchorElAvatar(null); }
+  const handleProfile = () => {
+    setAnchorElAvatar(null);
+    Router.push('/account');
+    //console.log("Click Profile")
+}
+const handleLogout = () => {
+    setAnchorElAvatar(null);
+    console.log("handle Logout Here");
+    localStorage.clear();
+    Router.push('/login');
+    
 
+}
   return (
     <>
       <DashboardNavbarRoot
@@ -75,9 +94,21 @@ export const DashboardNavbar = (props) => {
               ml: 1
             }}
             src="/static/images/avatars/avatar_1.png"
+            onClick={handleClickAvatar}
           >
             <UserCircleIcon fontSize="small" />
           </Avatar>
+           <Menu
+              // id="simple-menu"
+              anchorEl={anchorElAvatar}
+              keepMounted
+              open={Boolean(anchorElAvatar)}
+              onClose={handleCloseAvatar}
+              transformOrigin={{ horizontal: 'right', vertical: 'top' }} // left of add button
+          >
+              <MenuItem onClick={handleProfile}>Profile</MenuItem>
+              <MenuItem onClick={handleLogout}>Log out</MenuItem>
+          </Menu> 
         </Toolbar>
       </DashboardNavbarRoot>
     </>

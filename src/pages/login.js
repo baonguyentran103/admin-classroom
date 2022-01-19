@@ -3,11 +3,21 @@ import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Box, Button, Container, TextField, Typography } from '@mui/material';
+import axios from 'axios';
 const Login = () => {
   const router = useRouter();
+  const parseJwt = (token) =>{
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(jsonPayload);
+  };
   const formik = useFormik({
     initialValues: {
-      password: 'password'
+      password: ''
     },
     validationSchema: Yup.object({
       userID: Yup
@@ -26,13 +36,15 @@ const Login = () => {
         username: values.userID,
         password: values.password,
       };
-      const response  = await null;
-      if (response) {
+      axios.post("http://localhost:3000/login", postData).then((response) =>{
         console.log(response);
+        localStorage.setItem('adminToken', response.data.token);
+
         router.push('/');
-      } else {
+
+      }).catch((error) => {
         alert("Please check your credentials and try again");
-      }
+      });
     }
   });
 

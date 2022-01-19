@@ -16,7 +16,7 @@ import {
 import { CurrentUrlAPI } from '../services/app.service'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import axios from 'axios';
-
+import withAuth from 'src/services/withAuth';
 const Register = () => {
   const router = useRouter();
   const formik = useFormik({
@@ -190,4 +190,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default withAuth(Register);

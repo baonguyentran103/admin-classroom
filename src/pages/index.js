@@ -1,20 +1,34 @@
 import Head from 'next/head';
-import { Box, Container, Grid } from '@mui/material';
-import { Budget } from '../components/dashboard/budget';
-import { LatestOrders } from '../components/dashboard/latest-orders';
-import { LatestProducts } from '../components/dashboard/latest-products';
-import { Sales } from '../components/dashboard/sales';
-import { TasksProgress } from '../components/dashboard/tasks-progress';
-import { TotalCustomers } from '../components/dashboard/total-customers';
-import { TotalProfit } from '../components/dashboard/total-profit';
-import { TrafficByDevice } from '../components/dashboard/traffic-by-device';
+import { Box, Container } from '@mui/material';
+import { AdminListToolbar } from '../components/admin/admin-list-toolbar';
 import { DashboardLayout } from '../components/dashboard-layout';
+import {useEffect, useState} from 'react'
+import withAuth from '../services/withAuth';
+import axios from 'axios'
+import {getUrlGetAllAdmin} from '../services/app.service'
+const Admins = () => { 
+  const [admins, setAdmins] = useState([]);
+  const fetchData = async () => {
+    const url = getUrlGetAllAdmin();
+    let listAdmin;
+    await axios.get(url).then((reponse) =>{
+      listAdmin = reponse.data;
+    })
+    console.log('res', listAdmin);
+    setAdmins(listAdmin);
+  }
+  useEffect(() =>{
+      if(admins.length ==0){
+        fetchData();
+      }
+    
+  }, []);
 
-const Dashboard = () => (
+  return(
   <>
     <Head>
       <title>
-        Dashboard | Material Kit
+        Admins | Cloud9
       </title>
     </Head>
     <Box
@@ -25,92 +39,10 @@ const Dashboard = () => (
       }}
     >
       <Container maxWidth={false}>
-        <Grid
-          container
-          spacing={3}
-        >
-          <Grid
-            item
-            lg={3}
-            sm={6}
-            xl={3}
-            xs={12}
-          >
-            <Budget />
-          </Grid>
-          <Grid
-            item
-            xl={3}
-            lg={3}
-            sm={6}
-            xs={12}
-          >
-            <TotalCustomers />
-          </Grid>
-          <Grid
-            item
-            xl={3}
-            lg={3}
-            sm={6}
-            xs={12}
-          >
-            <TasksProgress />
-          </Grid>
-          <Grid
-            item
-            xl={3}
-            lg={3}
-            sm={6}
-            xs={12}
-          >
-            <TotalProfit sx={{ height: '100%' }} />
-          </Grid>
-          <Grid
-            item
-            lg={8}
-            md={12}
-            xl={9}
-            xs={12}
-          >
-            <Sales />
-          </Grid>
-          <Grid
-            item
-            lg={4}
-            md={6}
-            xl={3}
-            xs={12}
-          >
-            <TrafficByDevice sx={{ height: '100%' }} />
-          </Grid>
-          <Grid
-            item
-            lg={4}
-            md={6}
-            xl={3}
-            xs={12}
-          >
-            <LatestProducts sx={{ height: '100%' }} />
-          </Grid>
-          <Grid
-            item
-            lg={8}
-            md={12}
-            xl={9}
-            xs={12}
-          >
-            <LatestOrders />
-          </Grid>
-        </Grid>
+        <AdminListToolbar admins = {admins}/>
       </Container>
     </Box>
   </>
-);
+)};
 
-Dashboard.getLayout = (page) => (
-  <DashboardLayout>
-    {page}
-  </DashboardLayout>
-);
-
-export default Dashboard;
+export default withAuth(Admins);

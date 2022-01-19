@@ -44,9 +44,4 @@ const Users = () => {
     </Box>
   </>
 )};
-Users.getLayout = (page) => (
-  <DashboardLayout>
-    {page}
-  </DashboardLayout>
-);
-export default Users;
+export default withAuth(Users);

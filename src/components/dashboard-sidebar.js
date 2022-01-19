@@ -20,13 +20,8 @@ import GroupsIcon from '@mui/icons-material/Groups';
 const items = [
   {
     href: '/',
-    icon: (<DateRangeIcon fontSize="small" />),
-    title: 'Calendar'
-  },
-  {
-    href: '/admins',
-    icon: (<ContactsIcon fontSize="small" />),
-    title: 'Address book'
+    icon: (<UserIcon fontSize="small" />),
+    title: 'Admins'
   },
   {
     href: '/account',
