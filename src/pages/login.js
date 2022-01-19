@@ -124,9 +124,9 @@ const Login = () => {
               variant="body2"
               align="center"
             >
-              <p class="small">
+              <p className="small">
                 Version 0.4.0
-                Copyright &copy; 2016-2021 <a target="_blank" href="https://www.cloud9-solutions.com">Cloud Nine Solutions Company</a>		</p>
+                Copyright &copy; 2016-2021</p>
 
             </Typography>
           </form>

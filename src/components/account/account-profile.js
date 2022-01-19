@@ -44,9 +44,9 @@ export const AccountProfile = ({ info }) => {
 
             <Avatar
               src={info.Avatar}
-              sx={{ mr: 2 }}
               // onClick={() => { openInPopup(admin) }}
               sx={{
+                mr: 2,
                 height: 64,
                 mb: 2,
                 width: 64

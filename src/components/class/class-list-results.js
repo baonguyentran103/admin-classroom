@@ -72,6 +72,7 @@ export const ClassListResults = ({ classs}) => {
               {classs.slice(page*limit, limit*(page + 1)).map((clasws) => (
                 <TableRow
                   hover
+                  key ={clasws.ClassID}
                 >
                 <TableCell>
                   <Box

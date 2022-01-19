@@ -65,6 +65,7 @@ export const AdminListResults = ({ admins}) => {
               {admins.slice(page*limit, limit*(page + 1)).map((admin) => (
                 <TableRow
                   hover
+                  key = {admin.AdminID}
                 >
                 <TableCell>
                   <Box

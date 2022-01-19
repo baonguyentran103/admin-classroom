@@ -113,6 +113,7 @@ export const UserListResults = ({ users }) => {
                 {users.slice(page * limit, limit * (page + 1)).map((user, index) => (
                   <TableRow
                     hover
+                    key = {user.UserID}
                   >
                     <TableCell sx={{ maxWidth: 200 }}>
                       <Box
@@ -123,10 +124,10 @@ export const UserListResults = ({ users }) => {
                       >
 
                         <EditText
-                          style={{ height: 20 }}
                           defaultValue={user.UserID}
                           onSave={(e) => handleSave(e, user)}
                           style={{
+                            height: 20,
                             fontSize: "1rem", padding: 5, width: "500px",
                             fontFamily: " Inter, -apple-system, BlinkMacSystemFont, Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji"
                           }}
