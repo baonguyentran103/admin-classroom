@@ -16,13 +16,13 @@ import {
 } from '@mui/material';
 import axios from 'axios';
 import { Search as SearchIcon } from '../../icons/search';
-import {getUrlGetAllClasses} from '../../services/app.service'
-import {ClassListResults} from './class-list-results';
+import { getUrlGetAllClasses } from '../../services/app.service'
+import { ClassListResults } from './class-list-results';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import IconButton from '@mui/material/IconButton';
 
 
-export const ClassListToolbar = ({classs}) => {
+export const ClassListToolbar = ({ classs }) => {
   const [rows, setRows] = useState(classs);
   const [searchedVal, setSearchedVal] = useState("");
   const [depart, setDepart] = useState("All");
@@ -31,13 +31,13 @@ export const ClassListToolbar = ({classs}) => {
   const [searchFil, setSearchFil] = useState(0);
 
   const fetchData = async () => {
-    
+
   };
 
-  useEffect(()=>{  
+  useEffect(() => {
     setRows(classs);
   }, [classs]);
-  useEffect(()=>{
+  useEffect(() => {
     fetchData();
   }, []);
 
@@ -45,31 +45,32 @@ export const ClassListToolbar = ({classs}) => {
     console.log(event.target.value);
     setSearchedVal(event.target.value);
     let tmp = event.target.value;
-    if(tmp!==''){
-      
+    if (tmp !== '') {
+
       const filteredRows = classs.filter((row) => {
-        if(searchFil ===0){
-          return row.Fullname.toLowerCase().includes(tmp.toLowerCase());
+        if (searchFil === 0) {
+          return row.ClassID.includes(tmp.toLowerCase());
         }
-        else return row.Email.toLowerCase().includes(tmp.toLowerCase());
+        else return row.Name.toLowerCase().includes(tmp.toLowerCase());
       });
       setRows(filteredRows);
     }
-    else{
+    else {
       setRows(classs);
+
     }
   };
   const handleClose = () => { setAnchorEl(null); }
-  const searchName = ()=>{
+  const searchName = () => {
     setSearchFil(0);
     handleClose();
   }
-  const searchMail = ()=>{
+  const searchMail = () => {
     setSearchFil(1);
     handleClose();
   }
   const handleClickFilter = (event) => setAnchorEl(event.currentTarget);
-  return(
+  return (
     <Box>
       <Box>
         <Box
@@ -85,13 +86,13 @@ export const ClassListToolbar = ({classs}) => {
             sx={{ m: 1 }}
             variant="h4"
           >
-            Classs
+            Classes
           </Typography>
         </Box>
         <Box sx={{ mt: 3 }}>
           <Card>
-            <CardContent sx={{display: 'flex', flexWrap: 'wrap'}}>
-              <Box sx={{ }}>
+            <CardContent sx={{ display: 'flex', flexWrap: 'wrap' }}>
+              <Box sx={{}}>
                 <TextField
                   fullWidth
                   InputProps={{
@@ -108,23 +109,23 @@ export const ClassListToolbar = ({classs}) => {
                   }}
                   placeholder="Search class"
                   variant="outlined"
-                  onChange= {handleSearch}
+                  onChange={handleSearch}
                 />
-                
+
               </Box>
-              <Box sx={{ mt:0}}>
-                <IconButton onClick={handleClickFilter}><FilterAltIcon fontSize= 'large'/></IconButton>
+              <Box sx={{ mt: 0 }}>
+                <IconButton onClick={handleClickFilter}><FilterAltIcon fontSize='large' /></IconButton>
                 <Menu
-                    // id="simple-menu"
-                    anchorEl={anchorEl}
-                    keepMounted
-                    open={Boolean(anchorEl)}
-                    onClose={handleClose}
-                    transformOrigin={{ horizontal: 'right', vertical: 'top' }} // left of add button
-                    sx ={{ml:15, mt: -3}}
+                  // id="simple-menu"
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={Boolean(anchorEl)}
+                  onClose={handleClose}
+                  transformOrigin={{ horizontal: 'right', vertical: 'top' }} // left of add button
+                  sx={{ ml: 15, mt: -3 }}
                 >
-                    <MenuItem selected= {searchFil === 0} onClick={searchName}>Fullname</MenuItem>
-                    <MenuItem selected= {searchFil === 1} onClick={searchMail}>Email</MenuItem>
+                  <MenuItem selected={searchFil === 0} onClick={searchName}>ID</MenuItem>
+                  <MenuItem selected={searchFil === 1} onClick={searchMail}>NAME</MenuItem>
                 </Menu>
                 {/* <InputLabel id="demo-simple-select-helper-label">Department</InputLabel>
                 <Select
@@ -135,19 +136,19 @@ export const ClassListToolbar = ({classs}) => {
                 > 
                   
                 </Select> */}
-                  
-                
+
+
               </Box>
             </CardContent>
           </Card>
         </Box>
       </Box>
-      <Box sx={{mt:3}}>
-        <ClassListResults classs={rows}/>
+      <Box sx={{ mt: 3 }}>
+        <ClassListResults classs={rows} />
       </Box>
-      
+
     </Box>
   );
-  
-  
+
+
 };

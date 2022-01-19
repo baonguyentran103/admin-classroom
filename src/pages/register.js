@@ -110,7 +110,7 @@ const Register = () => {
                 color="textPrimary"
                 variant="h4"
               >
-                Create a new account
+                Create a new admin account
               </Typography>
               <Typography
                 color="textSecondary"

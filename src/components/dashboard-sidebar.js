@@ -17,26 +17,29 @@ import { NavItem } from './nav-item';
 import ContactsIcon from '@mui/icons-material/Contacts';
 import DateRangeIcon from '@mui/icons-material/DateRange';
 import GroupsIcon from '@mui/icons-material/Groups';
+import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
+import ManageAccountsTwoToneIcon from '@mui/icons-material/ManageAccountsTwoTone';
 const items = [
   {
+    href: '/account',
+    icon: (<AccountCircleRoundedIcon fontSize="small" />),
+    title: 'Your profile'
+  },
+  {
     href: '/',
-    icon: (<UserIcon fontSize="small" />),
+    icon: (<ManageAccountsTwoToneIcon fontSize="small" />),
     title: 'Admins'
   },
-  // {
-  //   href: '/account',
-  //   icon: (<UserIcon fontSize="small" />),
-  //   title: 'Account'
-  // },
+
   {
     href: '/class',
     icon: (<GroupsIcon fontSize="small" />),
-    title: 'Class'
+    title: 'Classes'
   },
   {
     href: '/users',
     icon: (<UserIcon fontSize="small" />),
-    title: 'User'
+    title: 'Users'
   },
   {
     href: '/register',
@@ -81,58 +84,27 @@ export const DashboardSidebar = (props) => {
           height: '100%'
         }}
       >
-        <div>
-          <Box sx={{ p: 3 }}>
-            <NextLink
-              href="/"
-              passHref
-            >
-              <a>
-                <Logo
-                  sx={{
-                    height: 42,
-                    width: 42
-                  }}
-                />
-              </a>
-            </NextLink>
-          </Box>
-          <Box sx={{ px: 2 }}>
-            <Box
-              sx={{
-                alignItems: 'center',
-                backgroundColor: 'rgba(255, 255, 255, 0.04)',
-                cursor: 'pointer',
-                display: 'flex',
-                justifyContent: 'space-between',
-                px: 3,
-                py: '11px',
-                borderRadius: 1
-              }}
-            >
-              <div>
-                <Typography
-                  color="inherit"
-                  variant="subtitle1"
-                >
-                  Nguyen Dat Admin
-                </Typography>
-
-              </div>
-              <SelectorIcon
+        <Box sx={{ mx: 3, mt: 3 }} style={{ display: "flex" }}>
+          <NextLink
+            href="/"
+            passHref
+          >
+            <a>
+              <Logo
                 sx={{
-                  color: 'neutral.500',
-                  width: 14,
-                  height: 14
+                  height: 42,
+                  width: 42
                 }}
               />
-            </Box>
-          </Box>
-        </div>
+            </a>
+          </NextLink>
+          <h2 style={{ marginLeft: 15 }}>Admin</h2>
+        </Box>
+
         <Divider
           sx={{
             borderColor: '#2D3748',
-            my: 3
+            my: 2
           }}
         />
         <Box sx={{ flexGrow: 1 }}>

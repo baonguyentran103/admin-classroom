@@ -9,7 +9,7 @@ import { Users as UsersIcon } from '../icons/users';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { Menu, MenuItem } from '@material-ui/core';
-
+import LogoutIcon from '@mui/icons-material/Logout';
 const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
   boxShadow: theme.shadows[3]
@@ -25,15 +25,15 @@ export const DashboardNavbar = (props) => {
     setAnchorElAvatar(null);
     Router.push('/account');
     //console.log("Click Profile")
-}
-const handleLogout = () => {
+  }
+  const handleLogout = () => {
     setAnchorElAvatar(null);
     console.log("handle Logout Here");
     localStorage.clear();
     Router.push('/login');
-    
 
-}
+
+  }
   return (
     <>
       <DashboardNavbarRoot
@@ -65,50 +65,11 @@ const handleLogout = () => {
           >
             <MenuIcon fontSize="small" />
           </IconButton>
-          <Tooltip title="Search">
-            <IconButton sx={{ ml: 1 }}>
-              <SearchIcon fontSize="small" />
-            </IconButton>
-          </Tooltip>
+
           <Box sx={{ flexGrow: 1 }} />
-          <Tooltip title="Contacts">
-            <IconButton sx={{ ml: 1 }}>
-              <UsersIcon fontSize="small" />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Notifications">
-            <IconButton sx={{ ml: 1 }}>
-              <Badge
-                badgeContent={4}
-                color="primary"
-                variant="dot"
-              >
-                <BellIcon fontSize="small" />
-              </Badge>
-            </IconButton>
-          </Tooltip>
-          <Avatar
-            sx={{
-              height: 40,
-              width: 40,
-              ml: 1
-            }}
-            src="/static/images/avatars/avatar_1.png"
-            onClick={handleClickAvatar}
-          >
-            <UserCircleIcon fontSize="small" />
-          </Avatar>
-           <Menu
-              // id="simple-menu"
-              anchorEl={anchorElAvatar}
-              keepMounted
-              open={Boolean(anchorElAvatar)}
-              onClose={handleCloseAvatar}
-              transformOrigin={{ horizontal: 'right', vertical: 'top' }} // left of add button
-          >
-              <MenuItem onClick={handleProfile}>Profile</MenuItem>
-              <MenuItem onClick={handleLogout}>Log out</MenuItem>
-          </Menu> 
+          <IconButton sx={{ ml: 1 }} onClick={() => { handleLogout() }}>
+            <LogoutIcon fontSize="large" />
+          </IconButton>
         </Toolbar>
       </DashboardNavbarRoot>
     </>

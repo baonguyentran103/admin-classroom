@@ -6,11 +6,11 @@ import { Box, Button, Container, TextField, Typography } from '@mui/material';
 import axios from 'axios';
 const Login = () => {
   const router = useRouter();
-  const parseJwt = (token) =>{
+  const parseJwt = (token) => {
     var base64Url = token.split('.')[1];
     var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
     var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
     }).join(''));
 
     return JSON.parse(jsonPayload);
@@ -36,12 +36,13 @@ const Login = () => {
         username: values.userID,
         password: values.password,
       };
-      axios.post("http://localhost:3000/login", postData).then((response) =>{
+      axios.post("http://localhost:3000/login", postData).then((response) => {
         console.log(response);
         localStorage.setItem('adminToken', response.data.token);
-
+        const data = parseJwt(response.data.token);
+        localStorage.setItem('adminData', data.id);
         router.push('/');
-
+        console.log("response.data.token", response.data.token, parseJwt(response.data.token));
       }).catch((error) => {
         alert("Please check your credentials and try again");
       });
@@ -71,8 +72,8 @@ const Login = () => {
               >
                 Sign in
               </Typography>
-              
-            
+
+
               <Typography
                 align="center"
                 color="textSecondary"
@@ -121,11 +122,11 @@ const Login = () => {
             <Typography
               color="textSecondary"
               variant="body2"
-              align = "center"
+              align="center"
             >
               <p class="small">
-	              Version 0.4.0
-		            Copyright &copy; 2016-2021 <a target="_blank" href="https://www.cloud9-solutions.com">Cloud Nine Solutions Company</a>		</p>
+                Version 0.4.0
+                Copyright &copy; 2016-2021 <a target="_blank" href="https://www.cloud9-solutions.com">Cloud Nine Solutions Company</a>		</p>
 
             </Typography>
           </form>

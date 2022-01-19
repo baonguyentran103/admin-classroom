@@ -141,7 +141,7 @@ export const UserListResults = ({ users }) => {
                         <Avatar
                           src={user.Avatar}
                           sx={{ mr: 2 }}
-                          onClick={() => { openInPopup(user) }}
+                        // onClick={() => { openInPopup(user) }}
                         >
                           {getInitials(user.FullName)}
                         </Avatar>
